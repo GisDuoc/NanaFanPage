@@ -1,0 +1,7 @@
+{
+  "name": "NanaFanPage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
