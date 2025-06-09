@@ -1,0 +1,36 @@
+ion-content{
+    --ion-background-color:#F6DFE5;
+}
+
+.rectangulo {
+  background-color: white;
+  padding: 10px 90px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  display: inline-block;
+}
+
+.characters-header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    top: 35px;
+}
+
+
+.btn-out {
+  --background: transparent;
+  --color: black; 
+
+}
+
+ion-card{
+    position: relative;
+    top: 45px;
+    border-radius: 20px;
+    background: white;
+}
+

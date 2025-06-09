@@ -1,0 +1,39 @@
+ion-content{
+    --ion-background-color:#F6DFE5;
+}
+@keyframes colorFlash {
+  0%   { background-color: #ff4d4d; color: white; }
+  25%  { background-color: #ffcd3c; color: black; }
+  50%  { background-color: #4dd2ff; color: white; }
+  75%  { background-color: #70ff70; color: black; }
+  100% { background-color: #ff4d4d; color: white; }
+}
+
+.flash-card {
+  animation: colorFlash 2s infinite;
+  transition: all 0.5s ease-in-out;
+  border-radius: 12px;
+  text-align: center;
+}
+
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .despedida{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+
+  ion-button{
+
+    --background:#F0809E;
+      margin-bottom: 40px;
+}

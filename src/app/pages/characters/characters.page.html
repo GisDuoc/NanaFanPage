@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+  <div class="characters-page">
+    <h1>Bienvenido {{ data.user | titlecase }} 🍓</h1> <!--uso de pipe -->
+    <div class="characters-header">
+      <ion-button color="danger" (click)="logout()">
+        <ion-icon name="log-out-outline" style="transform: rotate(180deg);"></ion-icon>
+      </ion-button>
+      <ion-label class="rectangulo">Personajes</ion-label>
+    </div>
+
+    <!-- TARJETAS DE PERSONAJES -->
+    <ion-list>
+      <app-character-card
+  *ngFor="let p of personajes"
+  [personaje]="p"
+(click)="showDetails(p)" color="light">
+      </app-character-card>
+    </ion-list>
+  </div>
+</ion-content>
+
+
+
+
+

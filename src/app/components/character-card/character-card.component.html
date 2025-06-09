@@ -1,0 +1,12 @@
+    <!-- TARJETAS DE PERSONAJES -->
+<ion-card *ngIf="personaje" class="card-list">
+   <ion-img src="{{ personaje.imagen }}"alt="{{personaje.nombre }}"></ion-img>
+  <div class="info-card-arrow">
+          <ion-card-title>{{ personaje.nombre }}</ion-card-title>
+            
+       <ion-icon name="arrow-forward-outline" size="large" class="arrow"></ion-icon>
+    </div>    
+</ion-card>
+
+
+      

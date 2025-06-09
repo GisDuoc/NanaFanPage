@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true" class="menu-login">
+  <div class="menu-login">
+  <div class="menu-principal">
+  <h1>NanaFan🍓</h1>
+  <p>Encuentra tus personajes favoritos</p>
+
+  <label class="input-label-usuario">Usuario</label>
+  <ion-input class="input-field" placeholder="Ingresa tu usuario🍓" type="text" [(ngModel)]="data.user"></ion-input>
+
+   <label class="input-label-contra">Contraseña</label>
+    <ion-input class="input-field" placeholder="Ingresa tu contraseña" type="password" [(ngModel)]="data.password"></ion-input>
+
+        <ion-button expand="block" class="login-button" (click)="iniciar()" >Ingresar</ion-button>
+
+
+            <p class="forgot-password">
+      ¿Olvidaste tu contraseña?
+      <a (click)="getPassword()" class="olvidar-link">Click Aquí</a>
+
+    </p>
+  </div>
+  <ul id="error">        
+      </ul>      
+  </div>
+</ion-content>
