@@ -37,7 +37,9 @@ export class ForgetPasswordPage implements AfterViewInit {
        this.presentAlert("El campo del correo no puede estar vacio.");
     }else{
     this.presentAlert("Se envió un correo para recuperar su clave :)");
+    this.data.email = "";
     this.router.navigate(['/login']);
+
     }
 
   } 

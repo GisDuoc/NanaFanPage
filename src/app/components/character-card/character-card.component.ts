@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/data';
+import { Character } from 'src/app/services/character';
 
 @Component({
   selector: 'app-character-card',
@@ -10,7 +11,9 @@ import { userData } from 'src/app/data';
 })
 export class CharacterCardComponent  implements OnInit {
 
-  @Input() personaje: any = {};
+  @Input()
+  personaje!: Character;
+  
   infoCharacter(event: Event) {
     event.stopPropagation(); 
     console.log('Info personaje:', this.personaje);

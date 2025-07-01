@@ -15,7 +15,7 @@ export class LogoutPage implements OnInit {
   }
 
   redirect() {
-  this.router.navigate(['/login']);
+  this.router.navigate(['/login'], { replaceUrl: true });
 }
 
 }

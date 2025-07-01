@@ -32,7 +32,7 @@ export class CharactersPage implements OnInit {
   }
 
   logout() {
-  this.router.navigate(['/logout'], { replaceUrl: true });
+  this.router.navigate(['/home'], { replaceUrl: true });
 }
 
 

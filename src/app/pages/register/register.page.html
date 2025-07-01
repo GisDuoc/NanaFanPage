@@ -1,0 +1,61 @@
+<ion-content [fullscreen]="true" class="menu-login">
+ <form #formulario="ngForm" (ngSubmit)="sendForm(formulario)">
+  <div class="menu-register">
+  <div class="menu-register-principal">
+        <div class="register-header">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline" style="transform: rotate(180deg);"></ion-icon>
+      </ion-button>
+      <ion-label class="rectangulo"><h1>Registro</h1></ion-label>
+    </div><br>
+  
+  <!--Nombre Completo Usuario -->
+  <ion-text color="danger" *ngIf="nombre.invalid && nombre.touched">
+  <p>El nombre es obligatorio</p>
+  </ion-text>
+  <ion-input label="Nombre Completo" label-placement="floating" fill="outline" placeholder="Nombre y Apellido" [(ngModel)]="data.nombreCompleto"  name="nombreCompleto"   required #nombre="ngModel"></ion-input><br>
+  
+  <!--Usuario-->
+  <ion-text color="danger" *ngIf="user.invalid && user.touched">
+  <p>El Usuario es obligatorio</p>
+  </ion-text>
+  <ion-input label="user" label-placement="floating" fill="outline" placeholder="user" [(ngModel)]="data.user" name="user" required #user="ngModel" ></ion-input><br>
+
+  <!--Fecha de nacimiento -->
+<ion-text color="danger" *ngIf="(fechaNacimiento.invalid && fechaNacimiento.touched) || edadInvalida">
+  <p *ngIf="fechaNacimiento.errors?.['required']">La fecha de nacimiento es obligatoria</p>
+  <p *ngIf="edadInvalida">Debes tener al menos 18 años para registrarte</p>
+</ion-text>
+  <ion-input label="Fecha de nacimiento" label-placement="floating" fill="outline" placeholder="Fecha de nacimiento" type="date" [(ngModel)]="data.fechaNacimiento" name="fechaNacimiento" required #fechaNacimiento="ngModel"></ion-input><br>
+
+  <!--Correo Electronico-->
+  <ion-text color="danger" *ngIf="correo.invalid && correo.touched">
+  <p>El correo es obligatorio</p>
+  </ion-text>
+ <ion-input label="Correo Electronico" label-placement="floating" fill="outline" placeholder="Correo Electronico" type="email" [(ngModel)]="data.correo" name="correo" required #correo="ngModel"></ion-input><br>
+
+   <!--Número de telefono-->
+ <ion-input label="Teléfono" label-placement="floating" fill="outline" placeholder="+569 0000 0000" type="tel" [(ngModel)]="data.telefono" name="telefono" ></ion-input><br>
+
+   <!--Contraseña-->
+<ion-text color="danger" *ngIf="password.touched && password.invalid">
+  <p *ngIf="password.errors?.['required']">La contraseña es obligatoria</p>
+  <p *ngIf="password.errors?.['minlength']">Mínimo 8 caracteres</p>
+  <p *ngIf="password.errors?.['pattern']">
+    Debe incluir al menos una mayúscula, un número y un símbolo
+  </p>
+</ion-text>
+ <ion-input label="Contraseña" label-placement="floating" fill="outline" placeholder="*******" type="password" [(ngModel)]="data.password" name="password" required #password="ngModel" minlength="8" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$"></ion-input><br>
+
+    <!--Repetir Contraseña-->
+  <ion-text color="danger" *ngIf="repeatPassword.touched && data.repeatPassword !== data.password">
+    <p>Las contraseñas no coinciden</p>
+  </ion-text>
+ <ion-input label="Repetir Contraseña" label-placement="floating" fill="outline" placeholder="*******" type="password" [(ngModel)]="data.repeatPassword" name="repeatPassword" required #repeatPassword="ngModel"></ion-input><br>
+
+  <ion-button expand="block" class="register-button" type="submit" [disabled]="formulario.invalid">Registrarse</ion-button>
+  
+  </div>
+    </div>
+    </form>
+</ion-content>  

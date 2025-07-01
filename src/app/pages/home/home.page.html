@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true" class="menu-home">
+  <div class="menu-home">
+  <div class="menu-principal-home">
+  <h1>NanaFan🍓</h1>
+<p>Hola {{usuario.user | titlecase}} bienvenido a Nanafan</p>
+
+<div class="clima">
+  <h2>Clima en {{weatherData.name}}</h2>
+  <p>Temperatura: {{weatherData.main.temp}} °C</p>
+  <p>Descripción: {{weatherData.weather[0].description}}</p>
+</div>
+
+
+<p>Por favor selecciona una opción: </p>
+
+  <ion-button expand="block" class="profile-button" (click)="profile()" >Perfil</ion-button>
+  <ion-button expand="block" class="next-button" (click)="next()" >Mirar personajes de anime</ion-button>
+  <ion-button expand="block" class="close-button" (click)="close()" >Cerrar sesión</ion-button>
+  </div>     
+  </div>
+</ion-content>

@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true" class="menu-profile">
+  <div class="menu-profile">
+  <div class="menu-principal-profile">
+            <div class="profile-header">
+      <ion-button (click)="back()">
+        <ion-icon name="log-out-outline" style="transform: rotate(180deg);"></ion-icon>
+      </ion-button>
+      <ion-label class="rectangulo"><h1>Perfil</h1></ion-label>
+    </div><br>
+
+  <!--Nombre Completo Usuario -->
+<ion-input
+  label="Nombre Completo"
+  label-placement="floating"
+  fill="outline"
+  placeholder="Nombre y Apellido"
+  name="nombreCompleto"
+  [(ngModel)]="usuario.name"
+  [disabled]="!edit">
+</ion-input><br>
+  
+  <!--Usuario-->
+  <ion-input 
+  label="user" 
+  label-placement="floating" 
+  fill="outline" 
+  placeholder="user" 
+  name="user"
+   [(ngModel)]="usuario.user"
+   [disabled]="!edit">
+</ion-input><br>
+
+  <!--Fecha de nacimiento -->
+  <ion-input 
+  label="Fecha de nacimiento" 
+  label-placement="floating" 
+  fill="outline" 
+  placeholder="Fecha de nacimiento" 
+  type="text"  
+  name="fechaNacimiento"
+  [(ngModel)]="usuario.dateOfBirth"
+  [disabled]="!edit">
+</ion-input><br>
+
+  <!--Correo Electronico-->
+ <ion-input 
+ label="Correo Electronico" 
+ label-placement="floating" 
+ fill="outline" 
+ placeholder="Correo Electronico" 
+ type="email" 
+ name="correo" 
+ [(ngModel)]="usuario.email"
+ [disabled]="!edit">
+</ion-input><br>
+
+   <!--Número de telefono-->
+ <ion-input 
+ label="Teléfono" 
+ label-placement="floating" 
+ fill="outline" 
+ placeholder="+569 0000 0000" 
+ type="tel" 
+ name="telefono" 
+ [(ngModel)]="usuario.phone"
+ [disabled]="!edit">
+</ion-input><br>
+
+
+<ion-button  (click)="enable()" *ngIf="!edit">
+  Modificar
+</ion-button>
+
+
+<ion-button (click)="presentPopover($event)" *ngIf="!edit">Opciones Avanzadas</ion-button>
+<ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+  <ng-template>
+    <ion-content class="ion-padding" >¿Deseas eliminar tu cuenta?</ion-content>
+    <ion-button (click)="deleteAccount()">
+ Eliminar cuenta
+</ion-button>
+
+  </ng-template>
+</ion-popover>
+
+<ion-button (click)="saveChanges()" *ngIf="edit">
+  Guardar Cambios
+</ion-button>
+
+<ion-button (click)="exitEditMode()" *ngIf="edit">
+ No Guardar
+</ion-button>
+
+  </div>     
+  </div>
+</ion-content>
