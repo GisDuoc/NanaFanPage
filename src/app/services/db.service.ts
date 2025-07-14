@@ -12,8 +12,11 @@ export class DbService {
   private database: SQLiteObject | null = null;
   private dbLista: BehaviorSubject<boolean> = new BehaviorSubject(false); //observable //Guarda un valor actual //Notifica a los suscriptores cuando cambia el valor.
 
-  constructor(private platform: Platform, private sqlite: SQLite) { 
-    console.log("TEST")
+  constructor(
+    private platform: Platform,
+    private sqlite: SQLite
+  ) { 
+    console.log("test")
     this.crearBD();
   }
 
@@ -24,6 +27,7 @@ export class DbService {
         name: 'characters.db',
         location: 'default' 
       }).then((db: SQLiteObject) => {
+        console.log('this.sqlite', this.sqlite);
         this.database = db;
         console.log("BD Creada");
         this.crearTablas();
@@ -37,6 +41,7 @@ export class DbService {
   dbState() {
     return this.dbLista;
   }
+  
 //CREAR TABLAS 
 async crearTablas() {
   if(this.database != null){
@@ -61,10 +66,11 @@ async crearTablas() {
         await this.database.executeSql(tablaUser, []);
         await this.database.executeSql(tablaCharacters, []);
 
-        for(let i in data) {
+   for(let i in data) {
           await this.database.executeSql(data[i], []);
-          console.log("listo" + i)
+          console.log("listo " + i)
         }
+
 
         console.log("Tabla Creada");
         this.dbLista.next(true);
@@ -79,40 +85,44 @@ async crearTablas() {
 
 //EXISTE USUARIO 
 async existeUsuario(username: string, password: string) {
-  if(this.database != null) {
-    let res = await this.database.executeSql( `SELECT * FROM user WHERE username = '${username}' AND pass = '${password}';`, []);
-    if(res.rows.length > 0)
-      return true;
+  if (this.database != null) {
+    const res = await this.database.executeSql(
+      `SELECT * FROM user WHERE username = ? AND password = ?;`,
+      [username, password]
+    );
+    return res.rows.length > 0;
   }
   return false;
 }
 
 //BUSCAR PERSONAJE 
 async buscarPersonajeDeUsuario(username: string) {
-  if(this.database != null) {
-    let res = await this.database.executeSql( `SELECT * FROM character WHERE user = '${username}';`, []);
+  if (this.database != null) {
+    const res = await this.database.executeSql(
+      `SELECT * FROM character WHERE user = ?;`,
+      [username]
+    );
 
-     let characters: Character[] = [];
+    const characters: Character[] = [];
 
-     if(res.rows.length > 0) {
-      for (var i = 0; i < res.rows.length; i++) {
-        characters.push({
-          id: res.rows.item(i).id,
-          nombre: res.rows.item(i).nombre, 
-          banda: res.rows.item(i).banda, 
-          rol: res.rows.item(i).rol, 
-          personalidad: res.rows.item(i).personalidad, 
-          descripcion: res.rows.item(i).descripcion, 
-          imagen: res.rows.item(i).imagen, 
-          user:null
-        });
-      }
-     }
-     
-      return characters;
+    for (let i = 0; i < res.rows.length; i++) {
+      characters.push({
+        id: res.rows.item(i).id,
+        nombre: res.rows.item(i).nombre,
+        banda: res.rows.item(i).banda,
+        rol: res.rows.item(i).rol,
+        personalidad: res.rows.item(i).personalidad,
+        descripcion: res.rows.item(i).descripcion,
+        imagen: res.rows.item(i).imagen,
+        user: res.rows.item(i).user
+      });
+    }
+
+    return characters;
   }
   return [];
 }
+
 
 }
 

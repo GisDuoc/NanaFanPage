@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { userData } from 'src/app/data';
+import { DbService } from 'src/app/services/db.service';
+
 
 @Component({
   selector: 'app-character-detail',
@@ -9,23 +10,26 @@ import { userData } from 'src/app/data';
   standalone: false
 })
 export class CharacterDetailPage implements OnInit {
-    data = {
-    user: "",
-    password: ""  
-  };
+   listaDePersonajes: any[] = [];
 
-   personaje: any;
+  constructor(private route: ActivatedRoute,private router: Router, private dbService: DbService) {
 
-  constructor(private route: ActivatedRoute,private router: Router) {
-    const nav = this.router.getCurrentNavigation();
-    const state = nav?.extras.state ?? history.state;
-    this.data.user = state?.sendUser || "";
    }
   
 ngOnInit() {
-   const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.personaje = userData.characters.find((p: { id: number }) => p.id === id);
+    this.dbService.dbState().subscribe((ready) => {
+      if (ready) {
+        this.cargarPersonajes();
+      }
+    });
 }
+
+cargarPersonajes() {
+    this.dbService.buscarPersonajeDeUsuario('admin').then((characters) => {
+      this.listaDePersonajes = characters;
+      console.log('🧠 Personajes desde la BD:', characters);
+    });
+  }
 
   logout() {
   this.router.navigate(['/characters']);

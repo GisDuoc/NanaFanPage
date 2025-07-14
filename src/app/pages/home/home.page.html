@@ -5,9 +5,9 @@
 <p>Hola {{usuario.user | titlecase}} bienvenido a Nanafan</p>
 
 <div class="clima">
-  <h2>Clima en {{weatherData.name}}</h2>
-  <p>Temperatura: {{weatherData.main.temp}} °C</p>
-  <p>Descripción: {{weatherData.weather[0].description}}</p>
+  <h2>Clima en {{weatherData?.name}}</h2>
+  <p>Temperatura: {{weatherData?.main?.temp}} °C</p>
+  <p>Descripción: {{weatherData?.weather[0]?.description}}</p>
 </div>
 
 

@@ -16,17 +16,17 @@ const routes: Routes = [
   {
     path: 'characters',
     loadChildren: () => import('./pages/characters/characters.module').then( m => m.CharactersPageModule),
-     canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'character-detail',
     loadChildren: () => import('./pages/character-detail/character-detail.module').then( m => m.CharacterDetailPageModule),
-     canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'logout',
     loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule),
-     canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'forget-password',
@@ -39,12 +39,12 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
-    canActivate: [AuthGuard]
+     canActivate: [AuthGuard]
   },
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
-    canActivate: [AuthGuard]
+   canActivate: [AuthGuard]
   },
   {
   path: 'notFound',

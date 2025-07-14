@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,23 +21,24 @@ export class ProfilePage implements OnInit {
   delete: boolean = false;
   userBeforeChanges: any = {};
 
-  constructor(private apiService: ApiService, private router: Router,public popoverController: PopoverController,private alertController: AlertController) { }
+  constructor(private router: Router,public popoverController: PopoverController,private alertController: AlertController,private storage: StorageService) { }
 
-  ngOnInit() {
-    const userId = localStorage.getItem('userId');
-    if (userId != null) {
-      this.apiService.getUserById(userId).subscribe({
-        next: (res) => {
-          this.usuario = res.user;
-          this.usuario.dateOfBirth = this.usuario.dateOfBirth?.split('T')[0];
-          console.log('usuario:', this.usuario);
-        },
-        error: (err) => {
-          console.error('Error al obtener usuario', err);
-        }
-      });
+ngOnInit() {
+this.getUsers();
     }
-  }
+
+async getUsers(){
+    const currentUser = await this.storage.get('currentUser');
+    this.usuario = currentUser;
+    console.log("actuaaaaaaal",currentUser)
+    if (currentUser) {
+          this.usuario.user;
+          this.usuario.dateOfBirth = this.usuario.dateOfBirth?.split('T')[0];
+        }else{
+           console.warn('No existe un usuario logueado en consola');
+        }
+}
+
 
   back() {
     this.router.navigate(['/home'], { replaceUrl: true });
@@ -47,18 +49,25 @@ export class ProfilePage implements OnInit {
     this.userBeforeChanges = { ...this.usuario };
   }
 
-  saveChanges() {
-    this.apiService.updateUser(this.usuario.id, this.usuario).subscribe({
-      next: (res) => {
-        console.log("Usuario actualizado con éxito");
-        this.edit = false;
-      },
-      error: (err) => {
-        console.error('Error al guardar cambios', err);
-      }
-    });
-  }
+async saveChanges() {
 
+  let users = await this.storage.get('users') || [];
+
+  const index = users.findIndex((u: any) => u.id === this.usuario.id);
+
+  if (index !== -1) {
+    users[index] = this.usuario;
+
+    await this.storage.set('users', users);
+
+    await this.storage.set('currentUser', this.usuario);
+
+    console.log("Usuario actualizado con éxito");
+    this.edit = false;
+  } else {
+    console.error("Usuario no encontrado en el storage");
+  }
+}
   exitEditMode() {
     this.usuario = { ...this.userBeforeChanges };
     this.edit = false;
@@ -107,24 +116,12 @@ export class ProfilePage implements OnInit {
     await alert.present();
   }
 
-  confirmDelete() {
-        const userId = localStorage.getItem('userId');
-    if (userId != null) {
-      this.apiService.deleteUser(userId).subscribe({
-        next: (res) => {
-           localStorage.removeItem('userId');
-           this.router.navigate(['/login'], { replaceUrl: true });
-          console.log('usuario eliminado');
-        },
-        error: (err) => {
-          console.error('Error al obtener usuario', err);
-        }
-      });
-    }
+ async confirmDelete() {
+  await this.storage.clear();
+  this.router.navigate(['/login']);
+}
 
 
   }
-
-}
 
 

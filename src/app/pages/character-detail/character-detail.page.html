@@ -1,4 +1,4 @@
-<ion-content *ngIf="personaje">
+<!--<ion-content *ngIf="personaje">
    <div class="characters-header">
       <ion-button class="btn-out" (click)="logout()">
         <ion-icon name="arrow-back-outline"></ion-icon>
@@ -16,6 +16,25 @@
 <p><b>Rol: </b>{{ personaje.rol }}</p>
 <p><b>Personalidad: </b>{{ personaje.personalidad }}</p>
 <p><b>Descripción: </b>{{ personaje.descripcion }}</p>
-    </ion-card-content>
+    </ion-card-content> 
+
   </ion-card>
+</ion-content> -->
+
+
+
+    <ion-content>
+  <ion-list>
+    <ion-item *ngFor="let c of listaDePersonajes">
+      <ion-thumbnail slot="start">
+        <img [src]="c.imagen">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ c.nombre }}</h2>
+        <p><strong>Banda:</strong> {{ c.banda }}</p>
+        <p><strong>Rol:</strong> {{ c.rol }}</p>
+        <p><strong>Personalidad:</strong> {{ c.personalidad }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

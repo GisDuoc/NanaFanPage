@@ -28,4 +28,8 @@ export class StorageService {
     await this._storage?.set(key, value);
   }
 
+    public async clear() {
+    console.log("Limpiando todo el storage");
+    await this._storage?.clear();
+  }
 }

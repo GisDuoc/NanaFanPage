@@ -17,31 +17,27 @@ export class LoginPage implements OnInit {
   password: ""
   }
  
-  constructor(private router: Router,private alertController: AlertController,private storage: StorageService, private db: DbService) { }
+  constructor(private router: Router,private alertController: AlertController,private storage: StorageService) { }
 
 
 async ngOnInit() {}
 
 async iniciar() {
-  const users = await this.storage.get("users");  // Obtiene los usuarios desde el storage
+  const users = await this.storage.get("users") || [];
 
-  const user = users.find((u: any) => 
+ const user = users.find((u: any) =>
     u.user === this.data.user && u.password === this.data.password
   );
 
   if (user) {
+    await this.storage.set('currentUser', user);
     let navigationExtras: NavigationExtras = {
       state: {
         sendUser: user.user,
         sendPswd: user.password
       }
     };
-   this.data = {
-  user: '',
-  password: ''
-}
     this.router.navigate(['/home'], navigationExtras);
-;
   } else {
     this.presentAlert("Usuario o contraseña incorrecta.");
   }

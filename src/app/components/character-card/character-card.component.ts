@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { userData } from 'src/app/data';
 import { Character } from 'src/app/services/character';
 
 @Component({
