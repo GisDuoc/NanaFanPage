@@ -37,6 +37,10 @@ async iniciar() {
         sendPswd: user.password
       }
     };
+    this.data = {
+  user: '',
+  password: ''
+  }
     this.router.navigate(['/home'], navigationExtras);
   } else {
     this.presentAlert("Usuario o contraseña incorrecta.");

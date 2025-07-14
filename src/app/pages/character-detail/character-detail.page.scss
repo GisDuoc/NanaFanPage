@@ -6,13 +6,13 @@ ion-card{
       --ion-text-color: #000000;
 }
 
-
 .rectangulo {
   background-color: white;
   padding: 10px 90px;
   border-radius: 6px;
   border: 1px solid #ccc;
   display: inline-block;
+  display: flex;
 }
 
 .characters-header {

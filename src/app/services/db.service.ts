@@ -68,27 +68,22 @@ async crearTablas() {
 
    for(let i in data) {
           await this.database.executeSql(data[i], []);
-          console.log("listo " + i)
         }
-
-
-        console.log("Tabla Creada");
-        this.dbLista.next(true);
-      }
-            catch (error) {
-        console.error(error);
-      } 
-  }  else {
+    console.log("Tablas creadas correctamente");
+    this.dbLista.next(true);
+  } catch (err) {
+    console.error("Error al crear tablas:", err);
     this.dbLista.next(false);
   }
 }
+}
 
 //EXISTE USUARIO 
-async existeUsuario(username: string, password: string) {
+async existeUsuario(username: string) {
   if (this.database != null) {
     const res = await this.database.executeSql(
-      `SELECT * FROM user WHERE username = ? AND password = ?;`,
-      [username, password]
+      `SELECT * FROM user WHERE username = ?;`,
+      [username]
     );
     return res.rows.length > 0;
   }
@@ -96,11 +91,11 @@ async existeUsuario(username: string, password: string) {
 }
 
 //BUSCAR PERSONAJE 
-async buscarPersonajeDeUsuario(username: string) {
+async buscarPersonajeDeUsuario(usuario: string) {
   if (this.database != null) {
     const res = await this.database.executeSql(
       `SELECT * FROM character WHERE user = ?;`,
-      [username]
+      [usuario]
     );
 
     const characters: Character[] = [];
@@ -122,8 +117,30 @@ async buscarPersonajeDeUsuario(username: string) {
   }
   return [];
 }
+async buscarPersonajePorId(id: number, user: string) {
+  if (this.database != null) {
+    const res = await this.database.executeSql(
+      `SELECT * FROM character WHERE id = ? AND user = ?;`,
+      [id, user]
+    );
 
+    if (res.rows.length > 0) {
+      const item = res.rows.item(0);
+      return {
+        id: item.id,
+        nombre: item.nombre,
+        banda: item.banda,
+        rol: item.rol,
+        personalidad: item.personalidad,
+        descripcion: item.descripcion,
+        imagen: item.imagen,
+        user: item.user
+      };
+    }
+  }
+  return null;
 
+}
 }
 
 

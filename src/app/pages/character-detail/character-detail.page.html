@@ -1,40 +1,31 @@
-<!--<ion-content *ngIf="personaje">
-   <div class="characters-header">
-      <ion-button class="btn-out" (click)="logout()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-      <ion-label class="rectangulo">Detalles</ion-label>
-    </div>
-  <ion-card>
-    <ion-card-header>
-      <ion-img [src]="personaje.imagen" [alt]="personaje.nombre"></ion-img>
-      <ion-card-title>{{ personaje.nombre }}</ion-card-title>
-      
-    </ion-card-header>
-    <ion-card-content>
-      <ion-card-subtitle><b>Banda: </b>{{ personaje.banda }}</ion-card-subtitle>
-<p><b>Rol: </b>{{ personaje.rol }}</p>
-<p><b>Personalidad: </b>{{ personaje.personalidad }}</p>
-<p><b>Descripción: </b>{{ personaje.descripcion }}</p>
-    </ion-card-content> 
+<ion-content>
+  <div class="characters-header">
+    <ion-button class="btn-out" (click)="logout()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-label class="rectangulo">Detalles</ion-label>
+  </div>
 
-  </ion-card>
-</ion-content> -->
-
-
-
-    <ion-content>
   <ion-list>
-    <ion-item *ngFor="let c of listaDePersonajes">
+    <ion-card *ngIf="personaje">
       <ion-thumbnail slot="start">
-        <img [src]="c.imagen">
+        <img [src]="personaje.imagen" [alt]="personaje.nombre" />
       </ion-thumbnail>
+
       <ion-label>
-        <h2>{{ c.nombre }}</h2>
-        <p><strong>Banda:</strong> {{ c.banda }}</p>
-        <p><strong>Rol:</strong> {{ c.rol }}</p>
-        <p><strong>Personalidad:</strong> {{ c.personalidad }}</p>
+        <h2>{{ personaje.nombre }}</h2>
+        <p><b>Banda:</b> {{ personaje.banda }}</p>
+        <p><b>Rol:</b> {{ personaje.rol }}</p>
+        <p><b>Personalidad:</b> {{ personaje.personalidad }}</p>
+        <p><b>Descripción:</b> {{ personaje.descripcion }}</p>
       </ion-label>
-    </ion-item>
+    </ion-card>
   </ion-list>
 </ion-content>
+
+
+
+
+
+
+

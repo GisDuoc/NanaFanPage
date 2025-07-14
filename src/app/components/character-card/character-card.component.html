@@ -1,13 +1,11 @@
     <!-- TARJETAS DE PERSONAJES -->
 <ion-card>
   <ion-card-header>
-    <ion-card-title>{{ personaje.nombre }}</ion-card-title>
-    <ion-card-subtitle>{{ personaje.banda }}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
     <img [src]="personaje.imagen" alt="Imagen de {{ personaje.nombre }}">
-    <p><strong>Rol:</strong> {{ personaje.rol }}</p>
-    <p>{{ personaje.descripcion }}</p>
+     <ion-card-title>{{ personaje.nombre }}</ion-card-title>
+    <ion-card-subtitle>{{ personaje.banda }}</ion-card-subtitle>
   </ion-card-content>
 </ion-card>
 
