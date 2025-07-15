@@ -1,5 +1,6 @@
 import './commands'
 import { mount } from 'cypress/angular'
+import '@angular/compiler';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
