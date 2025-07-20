@@ -61,7 +61,7 @@ private cargarClima() {
 
   
  close(){
-    this.router.navigate(['/login'], { replaceUrl: true });
+    this.router.navigate(['/logout'], { replaceUrl: true });
     console.log('Cerrando sesión... ')
   }
 

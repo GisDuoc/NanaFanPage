@@ -10,7 +10,7 @@ function Login() {
   cy.get('#usuario').click().type('{selectall}admin')
   cy.get('#clave').click().type('Admin123@')
   cy.contains('ion-button', 'Ingresar').click()
-  cy.location().should('match', /\/home$/)
+  cy.url({ timeout: 10000 }).should('match', /\/home$/);
 }
 
 function Perfil() {
@@ -29,18 +29,17 @@ describe('Spec prueba', () => {
   })
 
   describe('login', () => {
-    it('correcto', () => {
+    it('Ingresa correctamente', () => {
       Login()
     })
-        it('incorrecto', () => {
+        it('No ingresa', () => {
       loginPrev()
       cy.get('#usuario').click().type('{selectall}aaa')
       cy.get('#clave').click().type('xxxx')
       cy.contains('ion-button', 'Ingresar').click()
       cy.get('#iniciar').click({ force: true });
-      cy.get('ion-alert').should('exist');
       cy.get('ion-alert .alert-message').should('contain.text', 'Usuario o contraseña incorrecta.');
-      cy.get('ion-alert').should('not.exist');
+       cy.url({ timeout: 10000 }).get('ion-alert').should('not.exist');
 
 
     })
